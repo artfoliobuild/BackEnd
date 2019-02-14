@@ -32,6 +32,35 @@ router
           .insert(post)
           .then(ids => res.json(ids[0]))
           .catch(er => res.status(500).json(err));
+  })
+  .put('/:id', (req, res) => {
+    const { id } = req.params;
+    const post = req.body;
+    db('posts')
+      .where('id', id)
+      .update(post)
+      .then(count =>
+        !count
+          ? res
+              .status(404)
+              .json({ message: 'There is no post with the specified ID' })
+          : res.json(count)
+      )
+      .catch(err => res.status(500).json(err));
+  })
+  .delete('/:id', (req, res) => {
+    const { id } = req.params;
+    db('posts')
+      .where('id', id)
+      .del()
+      .then(count =>
+        !count
+          ? res
+              .status(404)
+              .json({ message: 'There is no post with the specified ID' })
+          : res.json(count)
+      )
+      .catch(err => res.status(500).json(err));
   });
 
 module.exports = router;
