@@ -22,6 +22,16 @@ router
       .then(post => res.json(post))
       .catch(err => res.status(500).json(err));
   })
-  .post('/', (req, res) => {});
+  .post('/', (req, res) => {
+    const post = req.body;
+    !post
+      ? res
+          .status(401)
+          .json({ error: 'Check the submitted information and try again.' })
+      : db('posts')
+          .insert(post)
+          .then(ids => res.json(ids[0]))
+          .catch(er => res.status(500).json(err));
+  });
 
 module.exports = router;
