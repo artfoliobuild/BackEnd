@@ -1,10 +1,14 @@
 {
-  "name": "BackEnd",
+  "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "test": "cross-env DB_ENV=testing jest --watch --verbose",
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "server": "nodemon"
+  },
+  "engines": {
+    "node": "10.x"
   },
   "repository": "https://github.com/artfoliobuild/BackEnd.git",
   "author": "Jorlost19 <39849563+Jorlost19@users.noreply.github.com>",
@@ -22,6 +26,8 @@
     "helmet": "^3.15.1",
     "jsonwebtoken": "^8.4.0",
     "knex": "^0.16.3",
+    "node.js": "^0.0.0",
+    "npm": "^6.8.0",
     "sqlite3": "^4.0.6"
   },
   "jest": {
