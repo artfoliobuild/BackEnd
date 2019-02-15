@@ -17,8 +17,8 @@ router
   .get('/:id', (req, res) => {
     const { id } = req.params;
     db('posts')
-      .where('post.id', id)
-      .join('comments', 'post.id', 'comment.post_id')
+      .where('id', id)
+      .join('comments', 'id', 'post_id')
       .then(post => res.json(post))
       .catch(err => res.status(500).json(err));
   })
@@ -58,7 +58,7 @@ router
           ? res
               .status(404)
               .json({ message: 'There is no post with the specified ID' })
-          : res.json(count)
+          : res.status(201).json(count)
       )
       .catch(err => res.status(500).json(err));
   });
