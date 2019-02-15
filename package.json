@@ -7,9 +7,6 @@
     "server": "nodemon",
     "test": "jest --watch --verbose"
   },
-  "engines": {
-    "node": "10.x"
-  },
   "repository": "https://github.com/artfoliobuild/BackEnd.git",
   "author": "Jorlost19 <39849563+Jorlost19@users.noreply.github.com>",
   "license": "MIT",
