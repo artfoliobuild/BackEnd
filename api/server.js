@@ -9,6 +9,16 @@ const jwt = require('jsonwebtoken');
 
 const server = express();
 server.use(express.json(), cors(), helmet());
+server.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json'
+  );
+  next();
+});
 server.use('/posts', postsRouter);
 server.use('/comments', commentsRouter);
 
