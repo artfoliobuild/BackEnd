@@ -7,7 +7,7 @@
     "server": "nodemon",
     "test": "jshint index.js"
   },
-  "repository": "https://github.com/artfoliobuild/BackEnd.git",
+  "repository": "https://github.com/artfoliobuild/BackEnd",
   "author": "Jorlost19 <39849563+Jorlost19@users.noreply.github.com>",
   "license": "MIT",
   "devDependencies": {
