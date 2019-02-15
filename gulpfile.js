@@ -7,6 +7,4 @@ var gulp = require("gulp");
 // var cleanCSS = require("gulp-clean-css");
 // var del = require("del");
 
-gulp.task("travis", ["build", "testServerJS"], function() {
-  process.exit(0);
-});
+gulp.task("travis", ["build", "testServerJS"], () => process.exit(0));
