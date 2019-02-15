@@ -47,11 +47,23 @@ router
       .update(comment)
       .then(count =>
         !count
-          ? res
-              .status(404)
-              .json({
-                message: 'There is no comment with the specified ID, try again!'
-              })
+          ? res.status(404).json({
+              message: 'There is no comment with the specified ID, try again!'
+            })
+          : res.json(count)
+      )
+      .catch(err => res.status(500).json(err));
+  })
+  .delete('/:id', (req, res) => {
+    const { id } = req.body;
+    db('comments')
+      .where('id', id)
+      .del()
+      .then(count =>
+        !count
+          ? res.status(404).json({
+              message: 'There is no comment with the specified ID, try again!'
+            })
           : res.json(count)
       )
       .catch(err => res.status(500).json(err));

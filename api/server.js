@@ -8,7 +8,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const server = express();
-server.use(express.json(), helmet(), cors());
+server.use(express.json(), cors(), helmet());
 server.use('/posts', postsRouter);
 server.use('/comments', commentsRouter);
 
