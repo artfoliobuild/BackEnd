@@ -58,7 +58,7 @@ router
           ? res
               .status(404)
               .json({ message: 'There is no post with the specified ID' })
-          : res.json(count)
+          : res.status(201).json(count)
       )
       .catch(err => res.status(500).json(err));
   });
