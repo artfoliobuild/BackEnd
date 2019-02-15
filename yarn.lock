@@ -3891,6 +3891,11 @@ nocache@2.0.0:
   resolved "https://registry.yarnpkg.com/nocache/-/nocache-2.0.0.tgz#202b48021a0c4cbde2df80de15a17443c8b43980"
   integrity sha1-ICtIAhoMTL3i34DeFaF0Q8i0OYA=
 
+node-bin-setup@^1.0.0:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/node-bin-setup/-/node-bin-setup-1.0.6.tgz#4b5c9bb937ece702d7069b36ca78af4684677528"
+  integrity sha512-uPIxXNis1CRbv1DwqAxkgBk5NFV3s7cMN/Gf556jSw6jBvV7ca4F9lRL/8cALcZecRibeqU+5dFYqFFmzv5a0Q==
+
 node-fetch-npm@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/node-fetch-npm/-/node-fetch-npm-2.0.2.tgz#7258c9046182dca345b4208eda918daf33697ff7"
@@ -3993,6 +3998,13 @@ node.js@^0.0.0:
   integrity sha1-UI4G+Wudm/h/5r+oTs6zF5T8HIc=
   dependencies:
     express "~3.4.0"
+
+node@^11.10.0:
+  version "11.10.0"
+  resolved "https://registry.yarnpkg.com/node/-/node-11.10.0.tgz#f6ed6667d9e0f6bace726579a227a14cc7b02b15"
+  integrity sha512-UTNYa/0oUWaXSXU6S7VtTxY7pY8KQgbNeRzGyHowxsDISd0SHkMFqxzuoFMMHyrH5inBDBHJ7AwXKqBlx48jCA==
+  dependencies:
+    node-bin-setup "^1.0.0"
 
 nodemon@^1.18.10:
   version "1.18.10"
