@@ -11,7 +11,10 @@
   "engines": {
     "node": "10.x"
   },
-  "repository": "https://github.com/artfoliobuild/BackEnd.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/artfoliobuild/BackEnd.git"
+  },
   "author": "Jorlost19 <39849563+Jorlost19@users.noreply.github.com>",
   "license": "MIT",
   "devDependencies": {
@@ -38,5 +41,10 @@
   },
   "jest": {
     "testEnvironment": "node"
+  },
+  "binary": {
+    "module_name": "backend",
+    "module_path": "./lib/binding/",
+    "host": "https://node-pre-gyp-tests.s3-us-west-1.amazonaws.com"
   }
 }
