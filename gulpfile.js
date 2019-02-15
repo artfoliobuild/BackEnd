@@ -1,4 +1,4 @@
-var gulp = require("gulp");
+// var gulp = require("gulp");
 // var less = require("gulp-less");
 // var babel = require("gulp-babel");
 // var concat = require("gulp-concat");
@@ -7,4 +7,4 @@ var gulp = require("gulp");
 // var cleanCSS = require("gulp-clean-css");
 // var del = require("del");
 
-gulp.task("travis", ["build", "testServerJS"], () => process.exit(0));
+// gulp.task("travis", ["build", "testServerJS"], () => process.exit(0));
