@@ -19,6 +19,7 @@ server.use(function(req, res, next) {
   );
   next();
 });
+
 server.use('/posts', postsRouter);
 server.use('/comments', commentsRouter);
 
