@@ -38,6 +38,23 @@ router
       .insert(comment)
       .then(ids => res.status(201).json([0]))
       .catch(err => res.status(500).json(err));
+  })
+  .put('/:id', (req, res) => {
+    const { id } = req.params;
+    const comment = req.body;
+    db('comments')
+      .where('id', id)
+      .update(comment)
+      .then(count =>
+        !count
+          ? res
+              .status(404)
+              .json({
+                message: 'There is no comment with the specified ID, try again!'
+              })
+          : res.json(count)
+      )
+      .catch(err => res.status(500).json(err));
   });
 
 module.exports = router;
