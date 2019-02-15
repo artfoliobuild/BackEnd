@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon",
-    "test": "jest --watch --verbose"
+    "test": "cross-env DB_ENV=testing jest --watch --verbose"
   },
   "repository": "https://github.com/artfoliobuild/BackEnd.git",
   "author": "Jorlost19 <39849563+Jorlost19@users.noreply.github.com>",
