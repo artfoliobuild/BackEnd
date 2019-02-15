@@ -21,12 +21,22 @@ router
       .then(comment =>
         comment
           ? res.json(comment)
-          : res
-              .status(404)
-              .json({
-                message: 'There is no comment with the specified ID, try again!'
-              })
+          : res.status(404).json({
+              message: 'There is no comment with the specified ID, try again!'
+            })
       )
+      .catch(err => res.status(500).json(err));
+  })
+  .post('/', (req, res) => {
+    const comment = req.body;
+    if (!comment.user_id || !comment.post_id) {
+      res
+        .status(400)
+        .json({ error: 'user_id and post_id fields are required!' });
+    }
+    db('comments')
+      .insert(comment)
+      .then(ids => res.status(201).json([0]))
       .catch(err => res.status(500).json(err));
   });
 
