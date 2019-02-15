@@ -4,4 +4,4 @@ node_js:
 deploy:
   provider: heroku
   api_key: process.env.HEROKU_API_KEY
-script: yarn start
+script: node index.js
