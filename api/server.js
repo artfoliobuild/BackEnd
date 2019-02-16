@@ -39,17 +39,6 @@ const generateToken = user => {
   return jwt.sign(payload, secret, options);
 };
 
-const protectRoute = (req, res, next) => {
-  if (req.headers.authorization) {
-    const token = req.headers.authorization;
-    jwt.verify(token, secret, (err, decodedToken) => {
-      err ? res.status(401).json({ message: 'Invalid token!' }) : next();
-    });
-  } else {
-    res.status(403).json({ error: 'FORBIDDEN!!!' });
-  }
-};
-
 server.post('/register', (req, res) => {
   const creds = req.body;
   if (

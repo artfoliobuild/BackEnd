@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../dbConfig');
+const { isLoggedIn, isAdmin } = require('../middlewares/middleware');
 
 router
   .get('/', (req, res) => {
@@ -28,7 +29,7 @@ router
       })
       .catch(err => res.status(500).json(err));
   })
-  .post('/', (req, res) => {
+  .post('/', isLoggedIn, isAdmin, (req, res) => {
     const post = req.body;
     !post
       ? res
@@ -39,7 +40,7 @@ router
           .then(ids => res.json(ids[0]))
           .catch(er => res.status(500).json(err));
   })
-  .put('/:id', (req, res) => {
+  .put('/:id', isLoggedIn, isAdmin, (req, res) => {
     const { id } = req.params;
     const post = req.body;
     db('posts')
@@ -54,7 +55,7 @@ router
       )
       .catch(err => res.status(500).json(err));
   })
-  .delete('/:id', (req, res) => {
+  .delete('/:id', isLoggedIn, isAdmin, (req, res) => {
     const { id } = req.params;
     db('posts')
       .where('id', id)
