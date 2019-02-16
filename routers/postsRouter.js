@@ -18,8 +18,14 @@ router
     const { id } = req.params;
     db('posts')
       .where('id', id)
-      .join('comments', 'id', 'post_id')
-      .then(post => res.json(post))
+      .first()
+      .then(post => {
+        db('comments')
+          .where('post_id', id)
+          .then(comments => {
+            res.json({ ...post, comments });
+          });
+      })
       .catch(err => res.status(500).json(err));
   })
   .post('/', (req, res) => {

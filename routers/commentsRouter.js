@@ -36,7 +36,7 @@ router
     }
     db('comments')
       .insert(comment)
-      .then(ids => res.status(201).json([0]))
+      .then(ids => res.status(201).json(ids[0]))
       .catch(err => res.status(500).json(err));
   })
   .put('/:id', (req, res) => {
