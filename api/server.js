@@ -6,6 +6,7 @@ const postsRouter = require('../routers/postsRouter');
 const commentsRouter = require('../routers/commentsRouter');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { isValidEmail } = require('../middlewares/middleware');
 
 const server = express();
 server.use(express.json(), cors(), helmet());
@@ -43,7 +44,7 @@ const generateToken = user => {
   return jwt.sign(payload, secret, options);
 };
 
-server.post('/register', (req, res) => {
+server.post('/register', isValidEmail, (req, res) => {
   const creds = req.body;
   if (
     !creds.password ||

@@ -27,4 +27,14 @@ const isAdmin = (req, res, next) => {
   }
 };
 
-module.exports = { isLoggedIn, isAdmin };
+const isValidEmail = (req, res, next) => {
+  req.body.email.match(
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  )
+    ? next()
+    : res.status(400).json({
+        message: 'Invalid email account, please verify your data and try again!'
+      });
+};
+
+module.exports = { isLoggedIn, isAdmin, isValidEmail };
