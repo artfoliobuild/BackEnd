@@ -26,10 +26,8 @@ server.use('/comments', commentsRouter);
 const secret = 'This is not my secret!';
 
 const generateToken = user => {
-  const { username, admin } = user;
   const payload = {
-    username,
-    admin
+    ...user
   };
   const options = {
     expiresIn: '1h',
@@ -57,10 +55,7 @@ server.post('/register', (req, res) => {
       db('users')
         .where('id', ids[0])
         .first()
-        .then(user => {
-          const { username, admin } = user;
-          res.status(201).json({ username, admin, token: generateToken(user) });
-        });
+        .then(user => res.status(201).json(generateToken(user)));
     })
     .catch(err => res.status(500).json(err));
 });
@@ -72,11 +67,7 @@ server.post('/login', (req, res) => {
     .first()
     .then(user =>
       user && bcrypt.compareSync(creds.password, user.password)
-        ? res.json({
-            username: user.username,
-            admin: user.admin,
-            token: generateToken(user)
-          })
+        ? res.json(generateToken(user))
         : res.status(401).json({ message: 'Invalid username or password!' })
     )
     .catch(err => res.status(500).json(err));
