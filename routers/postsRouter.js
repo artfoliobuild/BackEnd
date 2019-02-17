@@ -29,7 +29,7 @@ router
       })
       .catch(err => res.status(500).json(err));
   })
-  .post('/', isLoggedIn, isAdmin, (req, res) => {
+  .post('/', isLoggedIn, (req, res) => {
     const post = req.body;
     !post
       ? res
