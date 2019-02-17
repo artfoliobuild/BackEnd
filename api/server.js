@@ -73,4 +73,20 @@ server.post('/login', (req, res) => {
     .catch(err => res.status(500).json(err));
 });
 
+server.put('/edit/:id', (req, res) => {
+  const { id } = req.params;
+  const user = req.body;
+  db('users')
+    .where('id', id)
+    .update(user)
+    .then(count =>
+      !count
+        ? res
+            .status(404)
+            .json({ message: 'There is no user with the specified ID!' })
+        : res.json(count)
+    )
+    .catch(err => res.status(500).json(err));
+});
+
 module.exports = server;
