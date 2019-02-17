@@ -38,7 +38,7 @@ router
       : db('posts')
           .insert(post)
           .then(ids => res.json(ids[0]))
-          .catch(er => res.status(500).json(err));
+          .catch(err => res.status(500).json(err));
   })
   .put('/:id', isLoggedIn, isAdmin, (req, res) => {
     const { id } = req.params;
