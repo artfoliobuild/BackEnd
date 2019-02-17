@@ -26,9 +26,14 @@ server.use('/comments', commentsRouter);
 const secret = 'This is not my secret!';
 
 const generateToken = user => {
-const {Firstname, Lastname, username, admin, avatar, id}
+  const { Firstname, Lastname, username, admin, avatar, id } = user;
   const payload = {
-    Firstname, Lastname, username, admin, avatar, id
+    Firstname,
+    Lastname,
+    username,
+    admin,
+    avatar,
+    id
   };
   const options = {
     expiresIn: '1h',
