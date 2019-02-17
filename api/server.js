@@ -26,13 +26,14 @@ server.use('/comments', commentsRouter);
 const secret = 'This is not my secret!';
 
 const generateToken = user => {
+const {Firstname, Lastname, username, admin, avatar, id}
   const payload = {
-    ...user
+    Firstname, Lastname, username, admin, avatar, id
   };
   const options = {
     expiresIn: '1h',
     jwtid: bcrypt.hashSync(user.username, 4),
-    subject: `${user.id}`
+    subject: `${id}`
   };
   return jwt.sign(payload, secret, options);
 };
