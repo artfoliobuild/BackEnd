@@ -28,7 +28,7 @@ router
       )
       .catch(err => res.status(500).json(err));
   })
-  .post('/', isLoggedIn, (req, res) => {
+  .post('/', (req, res) => {
     const comment = req.body;
     if (!comment.user_id || !comment.post_id) {
       res
@@ -40,7 +40,7 @@ router
       .then(ids => res.status(201).json(ids[0]))
       .catch(err => res.status(500).json(err));
   })
-  .put('/:id', isLoggedIn, (req, res) => {
+  .put('/:id', (req, res) => {
     const { id } = req.params;
     const comment = req.body;
     db('comments')
@@ -55,7 +55,7 @@ router
       )
       .catch(err => res.status(500).json(err));
   })
-  .delete('/:id', isLoggedIn, (req, res) => {
+  .delete('/:id', (req, res) => {
     const { id } = req.body;
     db('comments')
       .where('id', id)

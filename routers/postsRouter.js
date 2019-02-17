@@ -40,7 +40,7 @@ router
           .then(ids => res.json(ids[0]))
           .catch(err => res.status(500).json(err));
   })
-  .put('/:id', isLoggedIn, isAdmin, (req, res) => {
+  .put('/:id', (req, res) => {
     const { id } = req.params;
     const post = req.body;
     db('posts')
@@ -55,7 +55,7 @@ router
       )
       .catch(err => res.status(500).json(err));
   })
-  .delete('/:id', isLoggedIn, isAdmin, (req, res) => {
+  .delete('/:id', (req, res) => {
     const { id } = req.params;
     db('posts')
       .where('id', id)
