@@ -6,7 +6,7 @@ const postsRouter = require('../routers/postsRouter');
 const commentsRouter = require('../routers/commentsRouter');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { isValidEmail } = require('../middlewares/middleware');
+const { isValidEmail, isValidPassword } = require('../middlewares/middleware');
 
 const server = express();
 server.use(express.json(), cors(), helmet());
@@ -24,7 +24,7 @@ server.use(function(req, res, next) {
 server.use('/posts', postsRouter);
 server.use('/comments', commentsRouter);
 
-const secret = 'This is not my secret!';
+const secret = process.env.JWT_SECRET_KEY;
 
 const generateToken = user => {
   const { Firstname, Lastname, username, admin, avatar, id } = user;
@@ -44,7 +44,7 @@ const generateToken = user => {
   return jwt.sign(payload, secret, options);
 };
 
-server.post('/register', isValidEmail, (req, res) => {
+server.post('/register', isValidPassword, isValidEmail, (req, res) => {
   const creds = req.body;
   if (
     !creds.password ||

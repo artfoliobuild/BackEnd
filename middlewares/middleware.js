@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const secret = 'This is not my secret!';
+const secret = process.env.JWT_SECRET_KEY;
 
 const isLoggedIn = (req, res, next) => {
   if (req.headers.authorization) {
@@ -37,4 +37,15 @@ const isValidEmail = (req, res, next) => {
       });
 };
 
-module.exports = { isLoggedIn, isAdmin, isValidEmail };
+const isValidPassword = (req, res, next) => {
+  req.body.password.match(
+    /^(?=.{8,})(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!?<>-_]).*$/
+  )
+    ? next()
+    : res.status(400).json({
+        message:
+          'Password must be at least 8 characters long and contain one lowercase letter, one uppercase letter, one number and one special character!'
+      });
+};
+
+module.exports = { isLoggedIn, isAdmin, isValidEmail, isValidPassword };
