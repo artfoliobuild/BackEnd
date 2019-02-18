@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const db = require('../dbConfig');
 const cors = require('cors');
@@ -69,6 +71,11 @@ server.post('/register', isValidPassword, isValidEmail, (req, res) => {
 
 server.post('/login', (req, res) => {
   const creds = req.body;
+  if (!creds.username || !creds.password) {
+    res
+      .status(400)
+      .json({ message: 'Username and Password are both required!' });
+  }
   db('users')
     .where('username', creds.username)
     .first()
