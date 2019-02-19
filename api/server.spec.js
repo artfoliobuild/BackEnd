@@ -240,25 +240,25 @@ describe('Registration and login endpoints', () => {
       expect(response.status).toBe(400);
     });
   });
-  describe('/edit/:id endpoint', () => {
-    it('should return status 500 when id does not match any existing user', async () => {
-      const creds = {
-        Firstname: 'jorge',
-        Lastname: 'osto',
-        username: 'kingkong',
-        email: 'jorge@gmail.com',
-        password: 'ASs24ada#TRE'
-      };
-      const token = await request(server)
-        .post('/register')
-        .send(creds);
-      const user = {
-        password: 'Kingkong12!'
-      };
-      const response = await request(server)
-        .put('/edit/3')
-        .send(user);
-      expect(response.status).toBe(500);
-    });
-  });
+  // describe('/edit/:id endpoint', () => {
+  //   it('should return status 500 when id does not match any existing user', async () => {
+  //     const creds = {
+  //       Firstname: 'jorge',
+  //       Lastname: 'osto',
+  //       username: 'kingkong',
+  //       email: 'jorge@gmail.com',
+  //       password: 'ASs24ada#TRE'
+  //     };
+  //     const token = await request(server)
+  //       .post('/register')
+  //       .send(creds);
+  //     const user = {
+  //       password: 'Kingkong12!'
+  //     };
+  //     const response = await request(server)
+  //       .put('/edit/3')
+  //       .send(user);
+  //     expect(response.status).toBe(500);
+  //   });
+  // });
 });
