@@ -89,18 +89,10 @@ server.post('/login', (req, res) => {
 
 server.put('/edit/:id', isValidPassword, isValidEmail, (req, res) => {
   const { id } = req.params;
-  const update = req.body;
-  const updatedUser = {};
+  const user = req.body;
   db('users')
     .where('id', id)
-    .first()
-    .select('Firstname', 'Lastname', 'email', 'password', 'username')
-    .then(user => {
-      updatedUser = { ...user, ...update };
-    });
-  db('users')
-    .where('id', id)
-    .update(updatedUser)
+    .update(user)
     .then(count =>
       !count
         ? res

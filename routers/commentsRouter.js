@@ -4,7 +4,7 @@ const db = require('../dbConfig');
 const { isLoggedIn } = require('../middlewares/middleware');
 
 router
-  .get('/', (req, res) => {
+  .get('/', isLoggedIn, (req, res) => {
     db('comments')
       .then(comments =>
         !comments.length
@@ -15,7 +15,7 @@ router
       )
       .catch(err => res.status(500).json(err));
   })
-  .get('/:id', (req, res) => {
+  .get('/:id', isLoggedIn, (req, res) => {
     const { id } = req.params;
     db('comments')
       .where('id', id)
@@ -28,7 +28,7 @@ router
       )
       .catch(err => res.status(500).json(err));
   })
-  .post('/', (req, res) => {
+  .post('/', isLoggedIn, (req, res) => {
     const comment = req.body;
     if (!comment.user_id || !comment.post_id) {
       res
@@ -40,7 +40,7 @@ router
       .then(ids => res.status(201).json(ids[0]))
       .catch(err => res.status(500).json(err));
   })
-  .put('/:id', (req, res) => {
+  .put('/:id', isLoggedIn, (req, res) => {
     const { id } = req.params;
     const comment = req.body;
     db('comments')
@@ -55,7 +55,7 @@ router
       )
       .catch(err => res.status(500).json(err));
   })
-  .delete('/:id', (req, res) => {
+  .delete('/:id', isLoggedIn, (req, res) => {
     const { id } = req.body;
     db('comments')
       .where('id', id)

@@ -1,15 +1,15 @@
-require('dotenv').config();
-const jwt = require('jsonwebtoken');
+require("dotenv").config();
+const jwt = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET_KEY;
 
 const isLoggedIn = (req, res, next) => {
   if (req.headers.authorization) {
     const token = req.headers.authorization;
     jwt.verify(token, secret, (err, decodedToken) => {
-      err ? res.status(401).json({ message: 'Invalid token!' }) : next();
+      err ? res.status(401).json({ message: "Invalid token!" }) : next();
     });
   } else {
-    res.status(403).json({ error: 'FORBIDDEN!!!' });
+    res.status(403).json({ error: "FORBIDDEN!!!" });
   }
 };
 
@@ -20,11 +20,11 @@ const isAdmin = (req, res, next) => {
       !decodedToken.admin
         ? res
             .status(403)
-            .json({ message: 'You have no permission to access this data!' })
+            .json({ message: "You have no permission to access this data!" })
         : next();
     });
   } else {
-    res.status(403).json({ error: 'FORBIDDEN!!!' });
+    res.status(403).json({ error: "FORBIDDEN!!!" });
   }
 };
 
@@ -34,7 +34,7 @@ const isValidEmail = (req, res, next) => {
   )
     ? next()
     : res.status(400).json({
-        message: 'Invalid email account, please verify your data and try again!'
+        message: "Invalid email account, please verify your data and try again!"
       });
 };
 
@@ -45,7 +45,7 @@ const isValidPassword = (req, res, next) => {
     ? next()
     : res.status(400).json({
         message:
-          'Password must be at least 8 characters long and contain one lowercase letter, one uppercase letter, one number and one special character!'
+          "Password must be at least 8 characters long and contain one lowercase letter, one uppercase letter, one number and one special character!"
       });
 };
 
