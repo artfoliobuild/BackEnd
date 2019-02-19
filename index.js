@@ -1,7 +1,7 @@
 // require('dotenv').config();
-const server = require("./api/server");
+const PORT = process.env.SERVER_PORT || 9000;
 
-const PORT = process.env.SERVER_PORT;
+const server = require("./api/server");
 
 server.get("/", (req, res) => {
   res.send("<h1>server running</h1>");
