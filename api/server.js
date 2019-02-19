@@ -87,7 +87,7 @@ server.post('/login', (req, res) => {
     .catch(err => res.status(500).json(err));
 });
 
-server.put('/edit/:id', (req, res) => {
+server.put('/edit/:id', isValidPassword, isValidEmail, (req, res) => {
   const { id } = req.params;
   const user = req.body;
   db('users')
