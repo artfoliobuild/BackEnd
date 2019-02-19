@@ -26,7 +26,7 @@ server.use(function(req, res, next) {
 server.use('/posts', postsRouter);
 server.use('/comments', commentsRouter);
 
-const secret = process.env.JWT_SECRET_KEY;
+const secret = 'this is not my secret!';
 
 const generateToken = user => {
   const { Firstname, Lastname, username, admin, avatar, id } = user;
