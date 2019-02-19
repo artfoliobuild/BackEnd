@@ -12,21 +12,21 @@ const { isValidEmail, isValidPassword } = require('../middlewares/middleware');
 
 const server = express();
 server.use(express.json(), cors(), helmet());
-server.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Credentials', true);
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json'
-  );
-  next();
-});
+// server.use(function(req, res, next) {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Credentials', true);
+//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+//   res.header(
+//     'Access-Control-Allow-Headers',
+//     'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json'
+//   );
+//   next();
+// });
 
 server.use('/posts', postsRouter);
 server.use('/comments', commentsRouter);
 
-const secret = 'this is not my secret!';
+const secret = process.env.JWT_SECRET_KEY;
 
 const generateToken = user => {
   const { Firstname, Lastname, username, admin, avatar, id } = user;
