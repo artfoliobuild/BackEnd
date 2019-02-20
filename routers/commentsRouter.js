@@ -29,7 +29,8 @@ router
       .catch(err => res.status(500).json(err));
   })
   .post('/', isLoggedIn, (req, res) => {
-    const comment = req.body;
+    const { content, user_id, post_id, avatar, username } = req.body;
+    const comment = { content, user_id, post_id, avatar, username };
     if (!comment.user_id || !comment.post_id) {
       res
         .status(400)
@@ -42,7 +43,8 @@ router
   })
   .put('/:id', isLoggedIn, (req, res) => {
     const { id } = req.params;
-    const comment = req.body;
+    const { content, user_id, post_id, avatar, username } = req.body;
+    const comment = { content, user_id, post_id, avatar, username };
     db('comments')
       .where('id', id)
       .update(comment)

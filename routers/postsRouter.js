@@ -44,7 +44,8 @@ router
   })
   .put('/:id', isLoggedIn, isAdmin, (req, res) => {
     const { id } = req.params;
-    const post = req.body;
+    const { description, likes, image, created_at, user_id } = req.body;
+    const post = { description, likes, image, created_at, user_id };
     db('posts')
       .where('id', id)
       .update(post)
