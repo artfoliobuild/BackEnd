@@ -1,6 +1,6 @@
 exports.up = function(knex, Promise) {
   return knex.schema.table('comments', table => {
-    table.string('username').notNullable();
+    table.string('username');
   });
 };
 

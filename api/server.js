@@ -6,6 +6,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const postsRouter = require('../routers/postsRouter');
 const commentsRouter = require('../routers/commentsRouter');
+const messagesRouter = require('../routers/messagesRouter');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { isValidEmail, isValidPassword } = require('../middlewares/middleware');
@@ -25,6 +26,7 @@ server.use(express.json(), cors(), helmet());
 
 server.use('/posts', postsRouter);
 server.use('/comments', commentsRouter);
+server.use('/messages', messagesRouter);
 
 const secret = process.env.JWT_SECRET_KEY;
 
