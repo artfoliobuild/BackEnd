@@ -4,7 +4,7 @@ const db = require('../dbConfig');
 const { isLoggedIn } = require('../middlewares/middleware');
 
 router
-  .get('/', isLoggedIn, (req, res) => {
+  .get('/', (req, res) => {
     db('comments')
       .then(comments =>
         !comments.length
@@ -15,7 +15,7 @@ router
       )
       .catch(err => res.status(500).json(err));
   })
-  .get('/:id', isLoggedIn, (req, res) => {
+  .get('/:id', (req, res) => {
     const { id } = req.params;
     db('comments')
       .where('id', id)

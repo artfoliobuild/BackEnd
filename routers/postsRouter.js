@@ -4,7 +4,7 @@ const db = require('../dbConfig');
 const { isLoggedIn, isAdmin } = require('../middlewares/middleware');
 
 router
-  .get('/', isLoggedIn, isAdmin, (req, res) => {
+  .get('/', (req, res) => {
     db('posts')
       .then(posts =>
         !posts.length
@@ -15,7 +15,7 @@ router
       )
       .catch(err => res.status(500).json(err));
   })
-  .get('/:id', isLoggedIn, isAdmin, (req, res) => {
+  .get('/:id', (req, res) => {
     const { id } = req.params;
     db('posts')
       .where('id', id)
@@ -30,7 +30,9 @@ router
       .catch(err => res.status(500).json(err));
   })
   .post('/', isLoggedIn, isAdmin, (req, res) => {
-    const post = req.body;
+    const { description, likes, image, created_at, user_id } = req.body;
+    const post = { description, likes, image, created_at, user_id };
+    console.log(post);
     !post
       ? res
           .status(401)
