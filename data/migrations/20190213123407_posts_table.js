@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     table.string('description');
     table.integer('likes').unsigned();
     table
-      .string('image')
+      .string('image', 500000)
       .notNullable()
       .unique();
     table.integer('user_id').unsigned();
