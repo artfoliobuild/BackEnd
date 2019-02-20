@@ -12,7 +12,11 @@ const jwt = require('jsonwebtoken');
 const { isValidEmail, isValidPassword } = require('../middlewares/middleware');
 
 const server = express();
-server.use(express.json(), cors(), helmet());
+server.use(
+  express.json({ limit: '50mb', extended: true, parameterLimit: 50000 }),
+  cors(),
+  helmet()
+);
 // server.use(function(req, res, next) {
 //   res.header('Access-Control-Allow-Origin', '*');
 //   res.header('Access-Control-Allow-Credentials', true);
