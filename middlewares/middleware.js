@@ -3,8 +3,8 @@ const jwt = require('jsonwebtoken');
 const secret = process.env.JWT_SECRET_KEY;
 
 const isLoggedIn = (req, res, next) => {
-  if (req.headers.authorization) {
-    const token = req.headers.authorization;
+  if (req.body.token) {
+    const token = req.body.token;
     jwt.verify(token, secret, (err, decodedToken) => {
       err ? res.status(401).json({ message: 'Invalid token!' }) : next();
     });
@@ -14,8 +14,8 @@ const isLoggedIn = (req, res, next) => {
 };
 
 const isAdmin = (req, res, next) => {
-  if (req.headers.authorization) {
-    const token = req.headers.authorization;
+  if (req.body.token) {
+    const token = req.body.token;
     jwt.verify(token, secret, (err, decodedToken) => {
       !decodedToken.admin
         ? res
