@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
       ? res.status(404).json({
           message: 'There is no messages just yet, please try again later'
         })
-      : res.json(messages)
+      : res.status(200).json(messages)
   );
 });
 router.post('/', isValidEmail, (req, res) => {

@@ -54,17 +54,18 @@ server.post('/register', isValidPassword, isValidEmail, (req, res) => {
     !creds.email
   ) {
     res.status(400).json({ error: 'All fields are required!' });
+  } else {
+    creds.password = bcrypt.hashSync(creds.password, 12);
+    db('users')
+      .insert(creds)
+      .then(ids => {
+        db('users')
+          .where('id', ids[0])
+          .first()
+          .then(user => res.status(201).json(generateToken(user)));
+      })
+      .catch(err => res.status(500).json(err));
   }
-  creds.password = bcrypt.hashSync(creds.password, 12);
-  db('users')
-    .insert(creds)
-    .then(ids => {
-      db('users')
-        .where('id', ids[0])
-        .first()
-        .then(user => res.status(201).json(generateToken(user)));
-    })
-    .catch(err => res.status(500).json(err));
 });
 
 server.post('/login', (req, res) => {
@@ -73,16 +74,17 @@ server.post('/login', (req, res) => {
     res
       .status(400)
       .json({ message: 'Username and Password are both required!' });
+  } else {
+    db('users')
+      .where('username', creds.username)
+      .first()
+      .then(user =>
+        user && bcrypt.compareSync(creds.password, user.password)
+          ? res.json(generateToken(user))
+          : res.status(401).json({ message: 'Invalid username or password!' })
+      )
+      .catch(err => res.status(500).json(err));
   }
-  db('users')
-    .where('username', creds.username)
-    .first()
-    .then(user =>
-      user && bcrypt.compareSync(creds.password, user.password)
-        ? res.json(generateToken(user))
-        : res.status(401).json({ message: 'Invalid username or password!' })
-    )
-    .catch(err => res.status(500).json(err));
 });
 
 server.put('/edit/:id', isValidPassword, isValidEmail, (req, res) => {

@@ -16,6 +16,13 @@ router
       .update(config)
       .then(ids => res.json(ids[0]))
       .catch(err => res.status(500).json(err));
+  })
+  .post('/', (req, res) => {
+    const config = req.body;
+    db('config')
+      .insert(config)
+      .then(ids => res.status(201).json(ids[0]))
+      .catch(err => res.status(500).json(err));
   });
 
 module.exports = router;
