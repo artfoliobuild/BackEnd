@@ -272,6 +272,10 @@ describe('Registration and login endpoints', () => {
         .post('/register')
         .send(creds);
       const user = {
+        Firstname: 'jorge',
+        Lastname: 'osto',
+        username: 'kingkong',
+        email: 'jorge@gmail.com',
         password: 'Kingkong12!'
       };
       const response = await request(server)

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../dbConfig');
+const { isValidEmail } = require('../middlewares/middleware');
 
 module.exports = router;
 
@@ -14,7 +15,7 @@ router
         : res.json(messages)
     );
   })
-  .post('/', (req, res) => {
+  .post('/', isValidEmail, (req, res) => {
     const message = req.body;
     db('messages')
       .insert(message)
