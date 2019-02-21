@@ -3,8 +3,6 @@ const router = express.Router();
 const db = require('../dbConfig');
 const { isValidEmail } = require('../middlewares/middleware');
 
-module.exports = router;
-
 router.get('/', (req, res) => {
   db('messages').then(messages =>
     !messages.length
@@ -21,3 +19,5 @@ router.post('/', isValidEmail, (req, res) => {
     .then(ids => res.status(201).json(ids[0]))
     .catch(er => res.status(500).json(err));
 });
+
+module.exports = router;

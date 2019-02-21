@@ -7,6 +7,7 @@ const helmet = require('helmet');
 const postsRouter = require('../routers/postsRouter');
 const commentsRouter = require('../routers/commentsRouter');
 const messagesRouter = require('../routers/messagesRouter');
+const configRouter = require('../routers/configRouter');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { isValidEmail, isValidPassword } = require('../middlewares/middleware');
@@ -17,20 +18,11 @@ server.use(
   cors(),
   helmet()
 );
-// server.use(function(req, res, next) {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   res.header('Access-Control-Allow-Credentials', true);
-//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-//   res.header(
-//     'Access-Control-Allow-Headers',
-//     'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json'
-//   );
-//   next();
-// });
 
 server.use('/posts', postsRouter);
 server.use('/comments', commentsRouter);
 server.use('/messages', messagesRouter);
+server.use('/config', configRouter);
 
 const secret = process.env.JWT_SECRET_KEY;
 

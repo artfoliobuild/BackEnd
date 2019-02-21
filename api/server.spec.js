@@ -299,17 +299,16 @@ describe('Registration and login endpoints', () => {
   describe('messages table endpoints', () => {
     describe('/get endpoint', () => {
       it('should return status 404 when there are no messages yet', async () => {
-        const message = {
-          fullname: 'jorge osto',
-          timestamp: 'asfasfdag',
-          email: 'asdfnfhasfhf',
-          message: 'asdfasfasfjasjfjasfja'
-        };
-        await request(server)
-          .post('/')
-          .send(message);
-
         try {
+          const message = {
+            fullname: 'jorge osto',
+            timestamp: 'asfasfdag',
+            email: 'asdfnfhasfhf',
+            message: 'asdfasfasfjasjfjasfja'
+          };
+          await request(server)
+            .post('/')
+            .send(message);
           const response = await request(server).get('/messages');
           expect(response.status).toBe(404);
         } catch (err) {
