@@ -5,20 +5,19 @@ const { isValidEmail } = require('../middlewares/middleware');
 
 module.exports = router;
 
-router
-  .get('/', (req, res) => {
-    db('messages').then(messages =>
-      !messages.length
-        ? res.status(404).json({
-            message: 'There is no messages just yet, please try again later'
-          })
-        : res.json(messages)
-    );
-  })
-  .post('/', isValidEmail, (req, res) => {
-    const message = req.body;
-    db('messages')
-      .insert(message)
-      .then(ids => res.status(201).json(ids[0]))
-      .catch(er => res.status(500).json(err));
-  });
+router.get('/', (req, res) => {
+  db('messages').then(messages =>
+    !messages.length
+      ? res.status(404).json({
+          message: 'There is no messages just yet, please try again later'
+        })
+      : res.json(messages)
+  );
+});
+router.post('/', isValidEmail, (req, res) => {
+  const message = req.body;
+  db('messages')
+    .insert(message)
+    .then(ids => res.status(201).json(ids[0]))
+    .catch(er => res.status(500).json(err));
+});
