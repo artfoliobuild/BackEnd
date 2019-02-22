@@ -151,11 +151,12 @@ describe('Registration and login endpoints', () => {
     });
     it('should return status 201 when valid fields are submitted', async () => {
       const creds = {
-        Firstname: 'jorge',
-        Lastname: 'osto',
-        username: 'kingkong',
+        Firstname: 'jorgertt',
+        Lastname: 'ostortrt',
+        username: 'kingkong124',
         email: 'jorge@gmail.com',
-        password: 'ASs24ada#TRE'
+        password: 'ASs24ada#TRE',
+        avatar: 'asdasfdfsdgsdgsg'
       };
       const response = await request(server)
         .post('/register')
@@ -196,7 +197,7 @@ describe('Registration and login endpoints', () => {
         username: 'kingkong',
         password: 'ASs24ada#TRE'
       };
-      request(server)
+      const token = await request(server)
         .post('/register')
         .send(creds);
       const response = await request(server)

@@ -80,7 +80,7 @@ server.post('/login', (req, res) => {
       .first()
       .then(user =>
         user && bcrypt.compareSync(creds.password, user.password)
-          ? res.json(generateToken(user))
+          ? res.status(200).json(generateToken(user))
           : res.status(401).json({ message: 'Invalid username or password!' })
       )
       .catch(err => res.status(500).json(err));
