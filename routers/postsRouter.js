@@ -31,7 +31,6 @@ router.get('/:id', (req, res) => {
 router.post('/', isLoggedIn, isAdmin, (req, res) => {
   const { description, likes, image, created_at, user_id } = req.body;
   const post = { description, likes, image, created_at, user_id };
-  console.log(post);
   !post
     ? res
         .status(401)
